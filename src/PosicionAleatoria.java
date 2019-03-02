@@ -39,10 +39,14 @@ public class PosicionAleatoria {
 		this.s = s;
 	}
 	public void generarPosicionAleatoria() {
-		i=rnd.nextInt(16-length);
-		j=rnd.nextInt(16-length);
 		d=rnd.nextBoolean();
 		s=rnd.nextBoolean();
+		if(s) {
+			i=rnd.nextInt(15);
+			j=rnd.nextInt(16-length);
+		}else {
+			i=rnd.nextInt(16-length);
+			j=rnd.nextInt(15);
+		}
 	}
-
 }
