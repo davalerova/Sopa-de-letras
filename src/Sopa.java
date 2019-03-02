@@ -21,7 +21,9 @@ public class Sopa {
 		d=true;
 		s=true;
 	}
-
+/**
+ * Método que recorre la matriz de 15 por 15 y asigna un caracter aleatorio a cada posición
+ */
 	public void llenarSopa() {
 		for(int i=0;i<matriz.length;i++) {
 			for(int j=0;j<matriz[0].length;j++) {
@@ -30,6 +32,10 @@ public class Sopa {
 			}
 		}
 	}
+	
+	/**
+	 * Método que imprime la matriz con su contenido
+	 */
 	public void imprimirSopa() {
 		for(int i=0;i<matriz.length;i++) {
 			for(int j=0;j<matriz[0].length;j++) {
@@ -38,7 +44,9 @@ public class Sopa {
 			System.out.println();
 		}
 	}
-	
+	/**
+	 * Método que imprime la criba o matriz con casillas ocupadas y disponibles
+	 */
 	public void imprimirCriba() {
 		System.out.println();
 		for(int i=0;i<criba.length;i++) {
@@ -50,6 +58,11 @@ public class Sopa {
 			System.out.println();
 		}
 	}
+	
+	/**
+	 * Método que valida si la posición aleatoria generada, su sentido y su dirección al colocar la palabra sobreescribe a una palabra ya colocada
+	 * @return
+	 */
 	public boolean validarCrilla() {
 		boolean a=true;
 		if(s) {
@@ -98,7 +111,10 @@ public class Sopa {
 
 		return a;
 	}
-
+	
+	/**
+	 * Método que inserta una palabra de forma horizontal
+	 */
 	public void insertarPalabraHorizontal() {
 		int indicePalabra=0;
 		if(d) {
@@ -128,6 +144,9 @@ public class Sopa {
 		}
 	}
 
+	/**
+	 * Método que inserta una palabra vertical
+	 */
 	public void insertarPalabraVertical() {
 		int indicePalabra=0;
 		if(d) {
@@ -158,6 +177,10 @@ public class Sopa {
 	}
 
 
+	/**
+	 * Método que crea un objeto posición desde la clase PosicionAleatoria 
+	 * 
+	 */
 	public void generarPosicionAleatoria() {
 		PosicionAleatoria pos=new PosicionAleatoria(palabra);
 		pos.generarPosicionAleatoria();
