@@ -7,8 +7,8 @@ public class Sopa {
 	private boolean [][] criba;
 	private int posX;
 	private int posY;
-	private boolean d;
-	private boolean s;
+	private boolean dir;
+	private boolean eje;
 	Random rnd;
 	String palabra="";
 
@@ -18,8 +18,8 @@ public class Sopa {
 		rnd = new Random();
 		posX=0;
 		posY=0;
-		d=true;
-		s=true;
+		dir=true;
+		eje=true;
 	}
 /**
  * Método que recorre la matriz de 15 por 15 y asigna un caracter aleatorio a cada posición
@@ -27,7 +27,7 @@ public class Sopa {
 	public void llenarSopa() {
 		for(int i=0;i<matriz.length;i++) {
 			for(int j=0;j<matriz[0].length;j++) {
-				matriz[i][j]=letras.charAt(rnd.nextInt(26));
+				matriz[i][j]=letras.charAt(rnd.nextInt(letras.length()));
 				criba[i][j]=true;
 			}
 		}
@@ -44,6 +44,7 @@ public class Sopa {
 			System.out.println();
 		}
 	}
+	
 	/**
 	 * Método que imprime la criba o matriz con casillas ocupadas y disponibles
 	 */
@@ -65,11 +66,11 @@ public class Sopa {
 	 */
 	public boolean validarCrilla() {
 		boolean a=true;
-		if(s) {
+		if(eje) {
 			//int indicePalabra=0;
-			if(d) {
+			if(dir) {
 				for(int i=0;i<palabra.length();i++) {
-					if(criba[posX][posY+i]) a=true;
+					if(criba[posX][posY+i]||matriz[posX][posY+i]==palabra.charAt(i)) a=true;
 					else {
 						a=false; 
 						break;
@@ -78,7 +79,7 @@ public class Sopa {
 				}
 			}else {
 				for(int i=0;i<palabra.length();i++) {
-					if(criba[posX][14-posY-i]) a=true;
+					if(criba[posX][14-posY-i]||matriz[posX][14-posY-i]==palabra.charAt(i)) a=true;
 					else {
 						a=false; 
 						break;
@@ -88,9 +89,9 @@ public class Sopa {
 			}
 		}else {
 			//int indicePalabra=0;
-			if(d) {
+			if(dir) {
 				for(int i=0;i<palabra.length();i++) {
-					if(criba[posX+i][posY]) a=true;
+					if(criba[posX+i][posY]||matriz[posX+i][posY]==palabra.charAt(i)) a=true;
 					else {
 						a=false; 
 						break;
@@ -99,7 +100,7 @@ public class Sopa {
 				}
 			}else {
 				for(int i=0;i<palabra.length();i++) {
-					if(criba[14-posX-i][posY])a=true;
+					if(criba[14-posX-i][posY]||matriz[14-posX-i][posY]==palabra.charAt(i))a=true;
 					else {
 						a=false; 
 						break;
@@ -117,7 +118,7 @@ public class Sopa {
 	 */
 	public void insertarPalabraHorizontal() {
 		int indicePalabra=0;
-		if(d) {
+		if(dir) {
 			if(validarCrilla()) {
 				for(int i=0;i<palabra.length();i++) {
 					matriz[posX][i+posY]=palabra.charAt(indicePalabra);
@@ -126,7 +127,7 @@ public class Sopa {
 				}
 			}else {
 				generarPosicionAleatoria();
-				if(s)insertarPalabraHorizontal();
+				if(eje)insertarPalabraHorizontal();
 				else insertarPalabraVertical();
 			}
 		}else {
@@ -138,7 +139,7 @@ public class Sopa {
 				}
 			}else {
 				generarPosicionAleatoria();
-				if(s)insertarPalabraHorizontal();
+				if(eje)insertarPalabraHorizontal();
 				else insertarPalabraVertical();
 			}
 		}
@@ -149,7 +150,7 @@ public class Sopa {
 	 */
 	public void insertarPalabraVertical() {
 		int indicePalabra=0;
-		if(d) {
+		if(dir) {
 			if(validarCrilla()) {
 				for(int i=0;i<palabra.length();i++) {
 					matriz[posX+i][posY]=palabra.charAt(indicePalabra);
@@ -158,7 +159,7 @@ public class Sopa {
 				}
 			}else {
 				generarPosicionAleatoria();
-				if(s)insertarPalabraHorizontal();
+				if(eje)insertarPalabraHorizontal();
 				else insertarPalabraVertical();
 			}
 		}else {
@@ -170,7 +171,7 @@ public class Sopa {
 				}
 			}else {
 				generarPosicionAleatoria();
-				if(s)insertarPalabraHorizontal();
+				if(eje)insertarPalabraHorizontal();
 				else insertarPalabraVertical();
 			}
 		}
@@ -186,14 +187,13 @@ public class Sopa {
 		pos.generarPosicionAleatoria();
 		posX=pos.getI();
 		posY=pos.getJ();
-		d=pos.getD();
-		s=pos.getS();
+		dir=pos.getD();
+		eje=pos.getS();
 		System.out.println("x: "+posX);
 		System.out.println("y: "+posY);
-		System.out.println("d: "+d);
-		System.out.println("s: "+s);
+		System.out.println("d: "+dir);
+		System.out.println("s: "+eje);
 		System.out.println("Palabra:"+palabra);
-
 	}
 
 	public static void main(String Args[]) {
@@ -203,7 +203,7 @@ public class Sopa {
 		while(sc.hasNext()) {
 			sp.palabra=sc.nextLine();
 			sp.generarPosicionAleatoria();
-			if(sp.s)sp.insertarPalabraHorizontal();
+			if(sp.eje)sp.insertarPalabraHorizontal();
 			else sp.insertarPalabraVertical();
 			sp.imprimirSopa();
 		}
