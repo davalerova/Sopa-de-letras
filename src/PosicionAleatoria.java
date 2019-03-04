@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class PosicionAleatoria {
 	private int i,j;
-	private boolean dir,eje;
+	private boolean d,s;
 	Random rnd;
 	int length;
 	public PosicionAleatoria(String palabra) {
@@ -10,8 +10,8 @@ public class PosicionAleatoria {
 		this.i = i;
 		this.j = j;
 		this.length=palabra.length();
-		this.dir=true;
-		this.eje=true;
+		this.d=true;
+		this.s=true;
 	}
 	public int getI() {
 		return i;
@@ -27,21 +27,21 @@ public class PosicionAleatoria {
 	}
 	
 	public boolean getD() {
-		return dir;
+		return d;
 	}
 	public void setD(boolean d) {
-		this.dir = d;
+		this.d = d;
 	}
 	public boolean getS() {
-		return eje;
+		return s;
 	}
 	public void setS(boolean s) {
-		this.eje = s;
+		this.s = s;
 	}
 	public void generarPosicionAleatoria() {
-		dir=rnd.nextBoolean();
-		eje=rnd.nextBoolean();
-		if(eje) {
+		d=rnd.nextBoolean();
+		s=rnd.nextBoolean();
+		if(s) {
 			i=rnd.nextInt(15);
 			j=rnd.nextInt(16-length);
 		}else {
